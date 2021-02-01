@@ -1,2 +1,0 @@
-INSERT INTO usuario (login,senha,nome,cpf) VALUES ("franklin-barreto", "$2y$12$jNe3kBI7yejxsKLZmSjcT.KL8QcBYKTkyH2QmRKf7pEHToyjHi1AG", "Franklin Barreto", "12345678910");
-INSERT INTO usuario (login,senha,nome,cpf) VALUES ("joao.pedro", "14587", "João Pedro", "45896578412");

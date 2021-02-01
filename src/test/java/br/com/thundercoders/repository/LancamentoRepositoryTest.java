@@ -54,35 +54,29 @@ public class LancamentoRepositoryTest {
 	@Test
 	@Order(1)
 	public void salvaLancamentoTest() {
-	}
-
-	@Test
-	@Order(2)
-	public void buscarLancamentoTest() {
-
 		Lancamento lancamento = repository.findById(1).orElseThrow(() -> new RuntimeException("Lancamento não existe"));
 		assertNotNull(lancamento);
 	}
 
 	@Test
-	@Order(3)
-	public void buscarLancamentosPorIdContaTest() {
-
+	@Order(2)
+	public void buscarLancamentoTest() {
 		List<Lancamento> lancamentos = repository.findAllByContaId(conta.getId());
-
+		
 		assertTrue(lancamentos.size() > 0);
+
 	}
 
 	@Test
-	@Order(4)
-	public void buscarLancamentosPorPeriodoEidContaTest() {
-
+	@Order(3)
+	public void buscarLancamentosPorIdContaTest() {
 		List<Lancamento> lancamentos = repository.findAllByContaIdAndDataHoraBetween(conta.getId(),
 				LocalDateTime.of(2020, 1, 1, 00, 00), // Data
 				// Inicio
 				LocalDateTime.of(2020, 1, 13, 00, 00));// Data Final
-
+		
 		assertTrue(lancamentos.size() > 0);
+
 	}
 
 }
