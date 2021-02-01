@@ -24,4 +24,8 @@ public class ContaService {
 
 		return contaRepository.save(conta);
 	}
+
+	public Conta findContaByUsuarioId(Integer id) {
+		return contaRepository.findByUsuarioId(id);
+	}
 }

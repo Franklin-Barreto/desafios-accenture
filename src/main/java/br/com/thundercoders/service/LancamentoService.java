@@ -1,16 +1,16 @@
 package br.com.thundercoders.service;
 
-import java.math.BigInteger;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-import br.com.thundercoders.model.*;
-import br.com.thundercoders.repository.ContaCorrenteRepository;
-import br.com.thundercoders.repository.ContaCreditoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import br.com.thundercoders.model.Conta;
+import br.com.thundercoders.model.Lancamento;
+import br.com.thundercoders.model.LancamentoTipo;
+import br.com.thundercoders.model.PlanoConta;
 import br.com.thundercoders.model.dto.DtoLancamento;
 import br.com.thundercoders.repository.LancamentoRepository;
 
@@ -20,23 +20,23 @@ public class LancamentoService {
 	private ContaService contaService;
 	private PlanoContaService planoContaService;
 	private LancamentoRepository lancamentoRepository;
-	private ContaCorrenteRepository contaCorrenteRepository;
-	private ContaCreditoRepository contaCreditoRepository;
 
 	@Autowired
 	public LancamentoService(LancamentoRepository lancamentoRepository, ContaService contaService,
-			PlanoContaService planoContaService,ContaCorrenteRepository contaCorrenteRepository, ContaCreditoRepository contaCreditoRepository) {
+			PlanoContaService planoContaService) {
 		this.contaService = contaService;
 		this.planoContaService = planoContaService;
 		this.lancamentoRepository = lancamentoRepository;
-		this.contaCorrenteRepository = contaCorrenteRepository;
-		this.contaCreditoRepository = contaCreditoRepository;
 
 	}
 
 	public Lancamento salvaLancamento(DtoLancamento dtoLancamento) {
 		LancamentoTipo lancamentoTipo = dtoLancamento.getLancamentoTipo();
 		Conta conta = contaService.findById(dtoLancamento.getContaId());
+		Conta contaDestino = null;
+		if (dtoLancamento.getContaDestinoId() != null) {
+			contaDestino = contaService.findById(dtoLancamento.getContaDestinoId());
+		}
 		PlanoConta planoConta = null;
 		if (dtoLancamento.getPlanoContaId() != null) {
 
@@ -47,18 +47,19 @@ public class LancamentoService {
 
 		lancamentoTipo.setService(contaService);
 		;
-		conta = lancamentoTipo.getOperacao().efetuarOperacao(dtoLancamento.getValor(), dtoLancamento.getContaId(),
-				dtoLancamento.getContaDestinoId());
-		lancamento.setContaDestino(conta);
-		return lancamentoRepository.save(lancamento);
+		contaDestino = lancamentoTipo.getOperacao().efetuarOperacao(dtoLancamento.getValor(),
+				dtoLancamento.getContaId(), dtoLancamento.getContaDestinoId());
+		lancamento.setContaDestino(contaDestino);
+		Lancamento lancamentoSalvo = lancamentoRepository.save(lancamento);
+		return lancamentoSalvo;
 	}
 
 	// Método extrair lancamentos por idConta
 	public List<DtoLancamento> buscarLancamentoPorConta(Integer idConta) {
 
-		 List<DtoLancamento> listDtoLancamentos = new ArrayList<>();
+		List<DtoLancamento> listDtoLancamentos = new ArrayList<>();
 
-		for ( Lancamento lancamentoAtual : lancamentoRepository.findAllByContaId(idConta)) {
+		for (Lancamento lancamentoAtual : lancamentoRepository.findAllByContaId(idConta)) {
 			listDtoLancamentos.add(new DtoLancamento(lancamentoAtual));
 		}
 		return listDtoLancamentos;
@@ -69,7 +70,8 @@ public class LancamentoService {
 			LocalDateTime dataFinal) {
 
 		List<DtoLancamento> listDtoLancamentos = new ArrayList<>();
-		for ( Lancamento lancamentoAtual : lancamentoRepository.findAllByContaIdAndDataHoraBetween(idConta,dataInicial,dataFinal)) {
+		for (Lancamento lancamentoAtual : lancamentoRepository.findAllByContaIdAndDataHoraBetween(idConta, dataInicial,
+				dataFinal)) {
 
 			listDtoLancamentos.add(new DtoLancamento(lancamentoAtual));
 

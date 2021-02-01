@@ -74,7 +74,6 @@ public class LancamentoRepositoryTest {
 				LocalDateTime.of(2020, 1, 1, 00, 00), // Data
 				// Inicio
 				LocalDateTime.of(2020, 1, 13, 00, 00));// Data Final
-		
 		assertTrue(lancamentos.size() > 0);
 
 	}

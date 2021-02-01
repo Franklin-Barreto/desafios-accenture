@@ -1,5 +1,7 @@
 package br.com.thundercoders.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -27,6 +29,10 @@ public class PlanoContaService {
 
 	public PlanoConta findById(Integer id) {
 		return planoContaRepository.findById(id).orElseThrow(() -> new RuntimeException("Plano de conta inexistente"));
+	}
+
+	public List<PlanoConta> findAll() {
+		return (List<PlanoConta>) planoContaRepository.findAll();
 	}
 
 }

@@ -1,61 +1,60 @@
 package br.com.thundercoders.service;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.mockito.Mockito.when;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import org.junit.jupiter.api.BeforeAll;
+import java.util.List;
+
 import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
-import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 import org.junit.jupiter.api.TestInstance.Lifecycle;
 import org.junit.jupiter.api.TestMethodOrder;
-import org.mockito.InjectMocks;
-import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.core.annotation.Order;
 
 import br.com.thundercoders.model.ContaTipo;
 import br.com.thundercoders.model.Usuario;
 import br.com.thundercoders.model.dto.DtoUsuario;
-import br.com.thundercoders.repository.UsuarioRepository;
 
+@SpringBootTest
 @TestInstance(Lifecycle.PER_CLASS)
 @TestMethodOrder(OrderAnnotation.class)
 public class UsuarioServiceTest {
 
-	@InjectMocks
+	@Autowired
 	private UsuarioService usuarioService;
-	@MockBean
-	private UsuarioRepository usuarioRepository;
-	private Usuario usuario;
 
-//	@BeforeAll
-//	public void initialize() {
-//		usuario = this.usuarioService.save(new Usuario("joao.pedro", "12345", "João Pedro", "54798563247"));
-//	}
-//
-//	@Test
-//	@Order(1)
-//	public void salvaUsuario() throws IllegalAccessException {
-//		Usuario usuario = new Usuario("joao.pedro", "12345", "João Pedro", "54798563247");
-//		when(usuarioRepository.save(usuario)).thenReturn(new Usuario());
-//		Usuario save = usuarioService.save(usuario);
-//		assertNotNull(save);
-//	}
-	/*
-	 * @Test
-	 * 
-	 * @Order(2) public void salvaUsuario2() throws IllegalAccessException { Usuario
-	 * usuario = this.usuarioService .save(new Usuario("igor.shimauti", "56789",
-	 * "Igor Shimauti", "36285117802")); assertNotNull(usuario); }
-	 * 
-	 * @Test
-	 * 
-	 * @Order(3) public void buscarPorId() { Usuario usuario =
-	 * this.usuarioService.findById(1); assertNotNull(usuario); }
-	 * 
-	 * @Test
-	 * 
-	 * @Order(4) public void buscarTodos() { List<Usuario> usuarios =
-	 * this.usuarioService.findAll(); assertTrue(usuarios.size() > 0); }
-	 */
+	@Test
+	@Order(1)
+	public void salvaUsuario() throws IllegalAccessException {
+		Usuario save = usuarioService.save(new DtoUsuario("guilherme.lima", "14587", "Guilherme Lima", "45896578412",ContaTipo.CONTACREDITO,600.0));
+		assertNotNull(save);
+	}
+
+	@Test
+
+	@Order(2)
+	public void salvaUsuario2() throws IllegalAccessException {
+		Usuario usuario = this.usuarioService.save(new DtoUsuario("igor.shimauti", "56789", "Igor Shimauti", "36285117802",ContaTipo.CONTACREDITO,700.0));
+		assertNotNull(usuario);
+	}
+
+	@Test
+
+	@Order(3)
+	public void buscarPorId() {
+		Usuario usuario = this.usuarioService.findById(1);
+		assertNotNull(usuario);
+	}
+
+	@Test
+
+	@Order(4)
+	public void buscarTodos() {
+		List<Usuario> usuarios = this.usuarioService.findAll();
+		assertTrue(usuarios.size() > 0);
+	}
+
 }

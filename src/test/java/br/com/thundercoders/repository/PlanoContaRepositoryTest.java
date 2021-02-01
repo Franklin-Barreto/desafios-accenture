@@ -2,7 +2,6 @@ package br.com.thundercoders.repository;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
@@ -24,27 +23,21 @@ class PlanoContaRepositoryTest {
 
 	private Usuario usuario;
 
-	@BeforeAll
-	public void initialize() {
-	   usuarioRepository.save(new Usuario("franklin-barreto", "12345", "Franklin Barreto", "12345678910"));
-	   usuarioRepository.save(new Usuario("franklin-barreto41", "12345", "Franklin Barreto", "12345678910"));
-	}
-
 	@Test
 	@Order(1)
 	void salvarPlanoContasTest() {
-		usuario = usuarioRepository.findById(1).orElseThrow(() -> new RuntimeException("usuário inexistente"));
-		PlanoConta planoConta = new PlanoConta(usuario, "Pagamento de salário");
-		PlanoConta save = repository.save(planoConta);
+		this.usuario = usuarioRepository.findById(1)
+				.orElseThrow(() -> new RuntimeException("Erro plano de conta repository"));
+		PlanoConta save = repository.save(new PlanoConta(usuario, "Pagamento de salário"));
 		assertNotNull(save.getId());
 	}
 
 	@Test
 	@Order(2)
 	void salvarPlanoContasTest2() {
-		Usuario usuario = usuarioRepository.findById(2).orElseThrow(() -> new RuntimeException("usuário inexistente"));
-		PlanoConta planoConta = new PlanoConta(usuario, "Pagamento de salário");
-		PlanoConta save = repository.save(planoConta);
+		this.usuario = usuarioRepository.findById(2)
+				.orElseThrow(() -> new RuntimeException("Erro plano de conta repository"));
+		PlanoConta save = repository.save(new PlanoConta(usuario, "Pagamento de salário"));
 		assertNotNull(save.getId());
 	}
 }

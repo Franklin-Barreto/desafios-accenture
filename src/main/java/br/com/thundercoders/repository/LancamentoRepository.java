@@ -14,8 +14,6 @@ public interface LancamentoRepository extends CrudRepository<Lancamento, Integer
 	@Query("FROM Lancamento l WHERE l.conta.id = :id")
 	public List<Lancamento> findAllByContaId(@Param("id") Integer id);
 
-	////between (TO_DATE(:dataInicial,'dd/MM/yyyy')) AND (TO_DATE(:dataFinal,'dd/MM/yyyy'))
-	@Query("FROM Lancamento l WHERE l.conta.id = :idConta AND l.dataHora > :dataInicial AND l.dataHora < :dataFinal ")
 	public List<Lancamento> findAllByContaIdAndDataHoraBetween(@Param("idConta")Integer idConta,@Param("dataInicial") LocalDateTime dataInicial,
 															   @Param("dataFinal") LocalDateTime dataFinal);
 
