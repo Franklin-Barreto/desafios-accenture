@@ -1,0 +1,1 @@
+java -Dserver.port=31096 -Dspring.profiles.active=prod $JAVA_OPTS -jar target/sistema-cadastramento-1.0-SNAPSHOT.jar
