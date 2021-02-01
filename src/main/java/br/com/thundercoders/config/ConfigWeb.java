@@ -23,10 +23,14 @@ public class ConfigWeb extends WebSecurityConfigurerAdapter {
 	@Autowired
 	private TokenService tokenService;
 
+	private static final String[] SWAGGER_WHITELIST = { "/v2/api-docs", "/swagger-resources", "/swagger-resources/**",
+			"/configuration/ui", "/configuration/security", "/swagger-ui.html", "/webjars/**" };
+
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		http.authorizeRequests().antMatchers("/usuario/logar", "/usuario/**").permitAll().anyRequest().authenticated()
-				.and().csrf().disable().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
+		http.authorizeRequests().antMatchers("/usuario/logar", "/usuario/**").permitAll().antMatchers(SWAGGER_WHITELIST)
+				.permitAll().anyRequest().authenticated().and().csrf().disable().sessionManagement()
+				.sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
 				.addFilterBefore(new JWTAuthorizationFilter(tokenService, jpaUserDetailService),
 						UsernamePasswordAuthenticationFilter.class)
 				.requiresChannel().requestMatchers(r -> r.getHeader("X-Forwarded-Proto") != null).requiresSecure();
