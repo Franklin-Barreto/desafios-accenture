@@ -28,7 +28,9 @@ public class ConfigWeb extends WebSecurityConfigurerAdapter {
 		http.authorizeRequests().antMatchers("/usuario/logar", "/usuario/**").permitAll().anyRequest().authenticated()
 				.and().csrf().disable().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
 				.addFilterBefore(new JWTAuthorizationFilter(tokenService, jpaUserDetailService),
-						UsernamePasswordAuthenticationFilter.class);
+						UsernamePasswordAuthenticationFilter.class)
+				.requiresChannel().requestMatchers(r -> r.getHeader("X-Forwarded-Proto") != null).requiresSecure();
+		;
 	}
 
 	@Override
