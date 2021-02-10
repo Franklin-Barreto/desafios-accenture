@@ -14,7 +14,7 @@ import br.com.thundercoders.model.ContaTipo;
 import br.com.thundercoders.model.Usuario;
 @DataJpaTest
 @TestInstance(Lifecycle.PER_CLASS)
-public class ContaRepositoryTest {
+ class ContaRepositoryTest {
 
 	@Autowired
 	private ContaRepository contaRepository;
@@ -23,7 +23,7 @@ public class ContaRepositoryTest {
 
 
 	@Test
-	public void salvaConta() {
+	 void salvaConta() {
 		Usuario usuario = usuarioRepository.save(new Usuario("joao.joaquim","123456", "joao", "1234567890"));
 		Conta conta = contaRepository.save(new ContaCorrente(usuario, ContaTipo.CORRENTE.toString(), "124-9", 200.0));
 		assertNotNull(conta);

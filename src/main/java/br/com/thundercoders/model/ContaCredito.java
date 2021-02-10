@@ -31,17 +31,18 @@ public class ContaCredito extends Conta {
 
 	@Override
 	public void debitar(Double valor) {
-
+		this.limite -= valor;
 	}
 
 	@Override
 	public void creditar(Double valor) {
-
+		this.limite += valor;
 	}
 
 	@Override
 	public void transferir(Double valor, Conta contaDestino) {
-
+		this.limite -= valor;
+		contaDestino.creditar(valor);
 	}
 
 	@Override

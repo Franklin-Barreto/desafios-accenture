@@ -40,8 +40,8 @@ public class DtoUsuario {
 	}
 
 	public DtoUsuario(Usuario usuario) {
-		this.login = usuario.getLogin();
-		this.senha = usuario.getSenha();
+		this.login = usuario.getUsername();
+		this.senha = usuario.getPassword();
 		this.nome = usuario.getNome();
 		this.cpf = usuario.getCpf();
 	}

@@ -39,16 +39,8 @@ public class Usuario extends EntidadeBase implements UserDetails {
 		this.cpf = cpf;
 	}
 
-	public String getLogin() {
-		return login;
-	}
-
 	public void setLogin(String login) {
 		this.login = login;
-	}
-
-	public String getSenha() {
-		return senha;
 	}
 
 	public void setSenha(String senha) {
@@ -104,13 +96,11 @@ public class Usuario extends EntidadeBase implements UserDetails {
 
 	@Override
 	public boolean isAccountNonExpired() {
-		// TODO Auto-generated method stub
 		return true;
 	}
 
 	@Override
 	public boolean isAccountNonLocked() {
-		// TODO Auto-generated method stub
 		return true;
 	}
 

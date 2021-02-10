@@ -6,9 +6,6 @@ public class Despesa implements OperacaoI {
 
 	private ContaService contaService;
 
-	public Despesa() {
-	}
-
 	@Override
 	public Conta efetuarOperacao(Double valor, Integer... contaId) {
 		Conta conta = contaService.findById(contaId[0]);

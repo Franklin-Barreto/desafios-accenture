@@ -34,9 +34,7 @@ public class LancamentoService {
 		LancamentoTipo lancamentoTipo = dtoLancamento.getLancamentoTipo();
 		Conta conta = contaService.findById(dtoLancamento.getContaId());
 		Conta contaDestino = null;
-		if (dtoLancamento.getContaDestinoId() != null) {
-			contaDestino = contaService.findById(dtoLancamento.getContaDestinoId());
-		}
+
 		PlanoConta planoConta = null;
 		if (dtoLancamento.getPlanoContaId() != null) {
 
@@ -46,12 +44,10 @@ public class LancamentoService {
 				dtoLancamento.getDescricao(), dtoLancamento.getDataHora(), dtoLancamento.getLancamentoTipo());
 
 		lancamentoTipo.setService(contaService);
-		;
 		contaDestino = lancamentoTipo.getOperacao().efetuarOperacao(dtoLancamento.getValor(),
 				dtoLancamento.getContaId(), dtoLancamento.getContaDestinoId());
 		lancamento.setContaDestino(contaDestino);
-		Lancamento lancamentoSalvo = lancamentoRepository.save(lancamento);
-		return lancamentoSalvo;
+		return lancamentoRepository.save(lancamento);
 	}
 
 	// Método extrair lancamentos por idConta

@@ -6,7 +6,7 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 
-public class RepositoryImpl<T, PK extends Serializable> implements RepositoryI<T, PK> {
+public class RepositoryImpl<T extends Serializable> implements RepositoryI<T> {
 
 	protected EntityManager em;
 

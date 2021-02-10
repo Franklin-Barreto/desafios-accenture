@@ -36,19 +36,17 @@ public class UsuarioService implements UserDetailsService {
 
 	public void incluir(Usuario usuarioEntity) throws IllegalAccessException {
 
-		System.err.println(usuarioEntity.getLogin());
-
-		boolean comprimentoValido = TextoUtils.validaComprimento(usuarioEntity.getLogin(), 20);
+		boolean comprimentoValido = TextoUtils.validaComprimento(usuarioEntity.getUsername(), 20);
 		if (!comprimentoValido) {
 
 			throw new IllegalAccessException("Comprimento inválido");
 		}
 
-		Usuario usuarioExists = usuarioRepository.findByLogin(usuarioEntity.getLogin());
+		Usuario usuarioExists = usuarioRepository.findByLogin(usuarioEntity.getUsername());
 
-		if (usuarioExists != null) // nonNull(usuarioEntity) ){
+		if (usuarioExists != null) 
 		{
-			throw new IllegalStateException("Já existe um usuario com o login " + usuarioEntity.getLogin());
+			throw new IllegalStateException("Já existe um usuario com o login " + usuarioEntity.getUsername());
 		}
 
 		usuarioRepository.save(usuarioEntity);

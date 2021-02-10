@@ -3,7 +3,7 @@ package br.com.thundercoders.repository;
 import java.io.Serializable;
 import java.util.List;
 
-public interface RepositoryI<T, PK extends Serializable> {
+public interface RepositoryI<T extends Serializable> {
 
 	public T save(T entity);
 

@@ -27,7 +27,7 @@ import br.com.thundercoders.model.Usuario;
 @TestInstance(Lifecycle.PER_CLASS)
 @TestMethodOrder(OrderAnnotation.class)
 @DataJpaTest
-public class LancamentoRepositoryTest {
+class LancamentoRepositoryTest {
 
 	@Autowired
 	private LancamentoRepository repository;
@@ -53,14 +53,14 @@ public class LancamentoRepositoryTest {
 
 	@Test
 	@Order(1)
-	public void salvaLancamentoTest() {
+	 void salvaLancamentoTest() {
 		Lancamento lancamento = repository.findById(1).orElseThrow(() -> new RuntimeException("Lancamento não existe"));
 		assertNotNull(lancamento);
 	}
 
 	@Test
 	@Order(2)
-	public void buscarLancamentoTest() {
+	 void buscarLancamentoTest() {
 		List<Lancamento> lancamentos = repository.findAllByContaId(conta.getId());
 		
 		assertTrue(lancamentos.size() > 0);
@@ -69,7 +69,7 @@ public class LancamentoRepositoryTest {
 
 	@Test
 	@Order(3)
-	public void buscarLancamentosPorIdContaTest() {
+	 void buscarLancamentosPorIdContaTest() {
 		List<Lancamento> lancamentos = repository.findAllByContaIdAndDataHoraBetween(conta.getId(),
 				LocalDateTime.of(2020, 1, 1, 00, 00), // Data
 				// Inicio
