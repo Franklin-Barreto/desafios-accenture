@@ -27,7 +27,8 @@ public class TokenService {
 		Usuario logado = (Usuario) auth.getPrincipal();
 
 		return Jwts.builder().setIssuer("bank line").setSubject(logado.getId().toString()).setIssuedAt(dataCriacao)
-				.setExpiration(dataExpiracao).signWith(SignatureAlgorithm.HS256, secret).compact();
+				.setExpiration(dataExpiracao).signWith(SignatureAlgorithm.HS256, secret)
+				.claim("conta", logado.getConta().getId()).compact();
 	}
 
 	public boolean isTokenValid(String token) {

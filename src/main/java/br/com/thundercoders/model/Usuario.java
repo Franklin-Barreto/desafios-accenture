@@ -5,6 +5,7 @@ import java.util.Objects;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.OneToOne;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -17,7 +18,7 @@ public class Usuario extends EntidadeBase implements UserDetails {
 	 */
 	private static final long serialVersionUID = 1L;
 
-	@Column(length = 20)
+	@Column(length = 40)
 	private String login;
 
 	@Column(length = 100, nullable = false)
@@ -28,6 +29,9 @@ public class Usuario extends EntidadeBase implements UserDetails {
 
 	@Column(length = 12, nullable = false)
 	private String cpf;
+	
+	@OneToOne(mappedBy = "usuario")
+	private Conta conta;
 
 	public Usuario() {
 	}
@@ -61,6 +65,10 @@ public class Usuario extends EntidadeBase implements UserDetails {
 
 	public void setCpf(String cpf) {
 		this.cpf = cpf;
+	}
+	
+	public Conta getConta() {
+		return conta;
 	}
 
 	@Override

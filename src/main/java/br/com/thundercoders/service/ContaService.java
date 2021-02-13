@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import br.com.thundercoders.model.Conta;
+import br.com.thundercoders.model.dto.DtoContaDashBoard;
 import br.com.thundercoders.repository.ContaRepository;
 
 @Service
@@ -27,5 +28,9 @@ public class ContaService {
 
 	public Conta findContaByUsuarioId(Integer id) {
 		return contaRepository.findByUsuarioId(id);
+	}
+	
+	public DtoContaDashBoard findDashBoard(Integer id) {
+		return contaRepository.findDashBoardByContaId(id);
 	}
 }
