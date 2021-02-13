@@ -33,7 +33,7 @@ import br.com.thundercoders.model.dto.DtoContaDashBoard;
 	
 	@Test
 	void buscaDadosDashBoard() {
-		DtoContaDashBoard conta = contaRepository.findByUsuarioId(1);
+		DtoContaDashBoard conta = contaRepository.findDashBoardByContaId(1);
 		assertEquals(500, conta.getLimite());
 		assertEquals(480, conta.getSaldo());
 		

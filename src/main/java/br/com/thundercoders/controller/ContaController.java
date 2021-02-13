@@ -30,7 +30,7 @@ public class ContaController {
 	@GetMapping("/dashboard/{id}")
 	public ResponseEntity<DtoContaDashBoard> dashBoard(@PathVariable Integer id) {
 		return ResponseEntity.ok(contaService.findDashBoard(id));
-
 	}
+	
 
 }

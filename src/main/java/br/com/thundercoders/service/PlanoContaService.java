@@ -6,8 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import br.com.thundercoders.model.PlanoConta;
+import br.com.thundercoders.model.PlanoContaTipo;
 import br.com.thundercoders.model.Usuario;
 import br.com.thundercoders.model.dto.DtoPlanoConta;
+import br.com.thundercoders.model.dto.DtoPlanoContaResponse;
 import br.com.thundercoders.repository.PlanoContaRepository;
 
 @Service
@@ -31,8 +33,12 @@ public class PlanoContaService {
 		return planoContaRepository.findById(id).orElseThrow(() -> new RuntimeException("Plano de conta inexistente"));
 	}
 
-	public List<PlanoConta> findAll() {
-		return (List<PlanoConta>) planoContaRepository.findAll();
+	public List<DtoPlanoContaResponse> findAllByTipo(Integer tipo) {
+		return planoContaRepository.findAllByTipo(PlanoContaTipo.valueOf(tipo));
+	}
+	
+	public List<PlanoConta> findAll(){
+		return planoContaRepository.findAll();
 	}
 
 }

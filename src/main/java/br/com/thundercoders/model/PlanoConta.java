@@ -11,6 +11,9 @@ public class PlanoConta extends EntidadeBase {
 
 	@Column(name = "descricao", length = 100)
 	private String descricao;
+	
+	@Enumerated(EnumType.STRING)
+	private PlanoContaTipo tipo;
 
 	public PlanoConta() {
 	}
@@ -34,5 +37,9 @@ public class PlanoConta extends EntidadeBase {
 
 	public void setUsuario(Usuario usuario) {
 		this.usuario = usuario;
+	}
+	
+	public PlanoContaTipo getTipo() {
+		return tipo;
 	}
 }

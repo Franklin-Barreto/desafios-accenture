@@ -1,6 +1,7 @@
 package br.com.thundercoders.service;
 
 import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
 import org.junit.jupiter.api.Order;
@@ -11,6 +12,7 @@ import org.junit.jupiter.api.TestMethodOrder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import br.com.thundercoders.model.PlanoContaTipo;
 import br.com.thundercoders.model.dto.DtoPlanoConta;
 
 @SpringBootTest
@@ -30,5 +32,12 @@ public class PlanoContaServiceTest {
 		planoContaService.salvaPlanoConta(new DtoPlanoConta(2, "Combutível"));
 		assertTrue(planoContaService.findAll().size()>=4);
 	}
+	
+	@Test
+	public void obterPlanoContaTipoPeloCodigo() {
+		PlanoContaTipo tipo = PlanoContaTipo.valueOf(1);
+		assertEquals(PlanoContaTipo.RECEITA, tipo);
+		}
+	
 
 }
