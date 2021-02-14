@@ -14,7 +14,7 @@ public class DtoLancamento {
 	private String descricao;
 	private LocalDateTime dataHora;
 	private LancamentoTipo lancamentoTipo;
-	
+
 	public DtoLancamento() {
 	}
 
@@ -41,7 +41,9 @@ public class DtoLancamento {
 
 	public DtoLancamento(Lancamento lancamento) {
 		this.contaId = lancamento.getConta().getId();
-		this.contaDestinoId = lancamento.getContaDestino().getId();
+		if (lancamento.getContaDestino() != null) {
+			this.contaDestinoId = lancamento.getContaDestino().getId();
+		}
 		this.planoContaId = lancamento.getPlanoConta().getId();
 		this.valor = lancamento.getValor();
 		this.descricao = lancamento.getDescricao();
