@@ -12,6 +12,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -49,13 +50,13 @@ public class UsuarioController {
 	}
 
 	@CrossOrigin
-	@RequestMapping("/findByid")
+	@GetMapping("/findByid")
 	public Usuario buscarUsuario(@RequestParam(value = "id", required = true) Integer id) {
 		return usuarioService.findById(id);
 	}
 	
 	@CrossOrigin
-	@RequestMapping("/findAll")
+	@GetMapping("/findAll")
 	public List<Usuario> buscarUsuarios(){
 		return usuarioService.findAll();
 	}
