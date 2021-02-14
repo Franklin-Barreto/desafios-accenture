@@ -28,7 +28,7 @@ public class TokenService {
 
 		return Jwts.builder().setIssuer("bank line").setSubject(logado.getId().toString()).setIssuedAt(dataCriacao)
 				.setExpiration(dataExpiracao).signWith(SignatureAlgorithm.HS256, secret)
-				.claim("conta", logado.getConta().getId()).claim("nome", logado.getNome()).compact();
+				.claim("conta", logado.getContas().get(0).getId()).claim("nome", logado.getNome()).compact();
 	}
 
 	public boolean isTokenValid(String token) {
@@ -36,7 +36,6 @@ public class TokenService {
 			Jwts.parser().setSigningKey(secret).parseClaimsJws(token);
 			return true;
 		} catch (Exception e) {
-			System.out.println(e.getMessage());
 			return false;
 		}
 	}

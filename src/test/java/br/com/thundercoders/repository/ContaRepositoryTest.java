@@ -11,7 +11,6 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 
 import br.com.thundercoders.model.Conta;
 import br.com.thundercoders.model.ContaCorrente;
-import br.com.thundercoders.model.ContaTipo;
 import br.com.thundercoders.model.Usuario;
 import br.com.thundercoders.model.dto.DtoContaDashBoard;
 @DataJpaTest
@@ -27,7 +26,7 @@ import br.com.thundercoders.model.dto.DtoContaDashBoard;
 	@Test
 	 void salvaConta() {
 		Usuario usuario = usuarioRepository.save(new Usuario("joao.joaquim","123456", "joao", "1234567890"));
-		Conta conta = contaRepository.save(new ContaCorrente(usuario, ContaTipo.CORRENTE.toString(), "124-9", 200.0));
+		Conta conta = contaRepository.save(new ContaCorrente(usuario,  200.0));
 		assertNotNull(conta);
 	}
 	

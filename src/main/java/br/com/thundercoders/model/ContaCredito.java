@@ -21,12 +21,12 @@ public class ContaCredito extends Conta {
 	public ContaCredito() {
 	}
 
-	public ContaCredito(Usuario usuario, String numeroCartao, String nomeImpresso, String cvv, Double limite) {
+	public ContaCredito(Usuario usuario) {
 		super(usuario);
-		this.numeroCartao = numeroCartao;
-		this.nomeImpresso = nomeImpresso;
-		this.cvv = cvv;
-		this.limite = limite;
+		nomeImpresso = usuario.getNome();
+		numeroCartao = getQuatroNumeros() + " " + getQuatroNumeros() + " " + getQuatroNumeros() + " "
+				+ getQuatroNumeros();
+		cvv = String.valueOf(getRand().ints(100, 999).findFirst().getAsInt());
 	}
 
 	@Override
@@ -47,11 +47,7 @@ public class ContaCredito extends Conta {
 
 	@Override
 	public Double getSaldo() {
-		return null;
+		return limite;
 	}
 
-	@Override
-	public void setSaldo(Double saldo) {
-		this.limite = saldo;
-	}
 }

@@ -5,14 +5,13 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-import br.com.thundercoders.model.ContaTipo;
 import br.com.thundercoders.model.Usuario;
 
 public class DtoUsuario {
 
 	@NotNull
 	@NotEmpty
-	@Size(max = 20)
+	@Size(max = 50)
 	private String login;
 
 	@NotEmpty
@@ -25,17 +24,14 @@ public class DtoUsuario {
 	@NotEmpty
 	private String cpf;
 
-	private ContaTipo contaTipo;
-
 	@Min(10)
 	private Double saldo;
 
-	public DtoUsuario(String login, String senha, String nome, String cpf, ContaTipo contaTipo, Double saldo) {
+	public DtoUsuario(String login, String senha, String nome, String cpf, Double saldo) {
 		this.login = login;
 		this.senha = senha;
 		this.nome = nome;
 		this.cpf = cpf;
-		this.contaTipo = contaTipo;
 		this.saldo = saldo;
 	}
 
@@ -60,10 +56,6 @@ public class DtoUsuario {
 
 	public String getCpf() {
 		return cpf;
-	}
-
-	public ContaTipo getContaTipo() {
-		return contaTipo;
 	}
 
 	public Double getSaldo() {

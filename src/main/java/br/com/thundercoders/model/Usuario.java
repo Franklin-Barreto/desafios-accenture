@@ -1,11 +1,15 @@
 package br.com.thundercoders.model;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
 import java.util.Objects;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.OneToOne;
+import javax.persistence.OneToMany;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -29,9 +33,9 @@ public class Usuario extends EntidadeBase implements UserDetails {
 
 	@Column(length = 12, nullable = false)
 	private String cpf;
-	
-	@OneToOne(mappedBy = "usuario")
-	private Conta conta;
+
+	@OneToMany(mappedBy = "usuario", cascade = CascadeType.PERSIST)
+	private List<Conta> contas = new ArrayList<>();
 
 	public Usuario() {
 	}
@@ -66,9 +70,14 @@ public class Usuario extends EntidadeBase implements UserDetails {
 	public void setCpf(String cpf) {
 		this.cpf = cpf;
 	}
-	
-	public Conta getConta() {
-		return conta;
+
+	public List<Conta> getContas() {
+		return Collections.unmodifiableList(contas);
+	}
+
+	public void addConta(Conta conta) {
+		conta.setUsuario(this);
+		contas.add(conta);
 	}
 
 	@Override

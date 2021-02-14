@@ -20,7 +20,6 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import br.com.thundercoders.model.Conta;
 import br.com.thundercoders.model.ContaCorrente;
-import br.com.thundercoders.model.ContaTipo;
 import br.com.thundercoders.model.Lancamento;
 import br.com.thundercoders.model.LancamentoTipo;
 import br.com.thundercoders.model.Usuario;
@@ -47,9 +46,9 @@ class LancamentoServiceTest {
 	@BeforeAll
 	public void initialize() {
 		this.usuario = this.usuarioService
-				.save(new DtoUsuario("joao.pedro", "14587", "João Pedro", "45896578412", ContaTipo.CORRENTE, 200.0));
+				.save(new DtoUsuario("joao.pedro", "14587", "João Pedro", "45896578412", 200.0));
 		this.conta = this.usuarioService.findContaUsuario(1);
-		this.contaDestino = contaService.save(new ContaCorrente(usuario, ContaTipo.CORRENTE.toString(), "5000", 400.0));
+		this.contaDestino = contaService.save(new ContaCorrente(usuario,  400.0));
 	}
 
 	@Test

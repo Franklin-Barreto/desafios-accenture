@@ -44,7 +44,9 @@ public class DtoLancamento {
 		if (lancamento.getContaDestino() != null) {
 			this.contaDestinoId = lancamento.getContaDestino().getId();
 		}
-		this.planoContaId = lancamento.getPlanoConta().getId();
+		if (lancamento.getPlanoConta() != null) {
+			this.planoContaId = lancamento.getPlanoConta().getId();
+		}
 		this.valor = lancamento.getValor();
 		this.descricao = lancamento.getDescricao();
 		this.dataHora = lancamento.getDataHora();

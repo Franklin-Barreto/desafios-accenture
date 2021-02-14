@@ -10,6 +10,8 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import br.com.thundercoders.model.Conta;
+import br.com.thundercoders.model.ContaCorrente;
+import br.com.thundercoders.model.ContaCredito;
 import br.com.thundercoders.model.Usuario;
 import br.com.thundercoders.model.dto.DtoUsuario;
 import br.com.thundercoders.repository.UsuarioRepository;
@@ -61,12 +63,9 @@ public class UsuarioService implements UserDetailsService {
 		Usuario usuario = dtoUsuario.converte();
 
 		usuario.setSenha( this.pEnconder.encode( usuario.getPassword() ));
-
+		usuario.addConta(new ContaCorrente(usuario, dtoUsuario.getSaldo()));
+		usuario.addConta(new ContaCredito(usuario));
 		Usuario usuarioSalvo = this.usuarioRepository.save(usuario);
-		Conta conta = dtoUsuario.getContaTipo().getConta();
-		conta.setUsuario(usuario);
-		conta.setSaldo(dtoUsuario.getSaldo());
-		contaService.save(conta);
 		return usuarioSalvo;
 	}
 

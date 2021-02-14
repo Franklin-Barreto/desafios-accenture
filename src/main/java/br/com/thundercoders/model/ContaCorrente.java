@@ -3,13 +3,14 @@ package br.com.thundercoders.model;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.PrimaryKeyJoinColumn;
+import javax.persistence.Transient;
 
 @Entity
 @PrimaryKeyJoinColumn(name = "id")
 public class ContaCorrente extends Conta {
 
-	@Column(name = "tipo")
-	private String tipo;
+	@Transient
+	private static byte digito = 0;
 
 	@Column(name = "numero")
 	private String numero;
@@ -20,27 +21,17 @@ public class ContaCorrente extends Conta {
 	public ContaCorrente() {
 	}
 
-	public ContaCorrente(Usuario usuario, String tipo, String numero, Double saldo) {
+	public ContaCorrente(Usuario usuario, Double saldo) {
 		super(usuario);
-		this.tipo = tipo;
-		this.numero = numero;
+		if (digito == 9) {
+			digito = 0;
+		}
+		this.numero = getQuatroNumeros() + "-" + digito++;
 		this.saldo = saldo;
-	}
-
-	public String getTipo() {
-		return tipo;
-	}
-
-	public void setTipo(String tipo) {
-		this.tipo = tipo;
 	}
 
 	public String getNumero() {
 		return numero;
-	}
-
-	public void setNumero(String numero) {
-		this.numero = numero;
 	}
 
 	@Override
@@ -52,21 +43,16 @@ public class ContaCorrente extends Conta {
 	public void debitar(Double valor) {
 		this.saldo -= valor;
 	}
-	
+
 	@Override
 	public void creditar(Double valor) {
 		this.saldo += valor;
 	}
-	
+
 	@Override
-	public void transferir(Double valor,Conta contaDestino) {
+	public void transferir(Double valor, Conta contaDestino) {
 		this.debitar(valor);
 		contaDestino.creditar(valor);
 	}
 
-	@Override
-	public void setSaldo(Double saldo) {
-		this.saldo = saldo;
-		
-	}
 }
