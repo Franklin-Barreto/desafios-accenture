@@ -49,6 +49,7 @@ public class LancamentoController {
 		return ResponseEntity.created(uri).body(lancamentoDto);
 	}
 
+	@CrossOrigin
 	@GetMapping("{idConta}")
 	public ResponseEntity<List<DtoLancamento>> buscarLancamentoPorConta(@PathVariable("idConta") Integer idConta) {
 
@@ -59,6 +60,7 @@ public class LancamentoController {
 		}
 	}
 
+	@CrossOrigin
 	@GetMapping("porPeriodo/{idConta}")
 	public ResponseEntity<List<DtoLancamento>> buscarLancamentoPorPeriodoEConta(@PathVariable("idConta") Integer idConta,@DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) @RequestParam LocalDateTime dataInicial,
 																				@DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) @RequestParam LocalDateTime dataFinal) {

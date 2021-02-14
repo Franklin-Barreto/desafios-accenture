@@ -39,6 +39,7 @@ public class UsuarioController {
 	@Autowired
 	private TokenService tokenService;
 
+	@CrossOrigin
 	@PostMapping
 	public ResponseEntity<DtoUsuario> incluirUsuario(@RequestBody @Valid DtoUsuario dtoUsuario,
 			UriComponentsBuilder uriBuilder) {
@@ -47,11 +48,13 @@ public class UsuarioController {
 		return ResponseEntity.created(uri).body(new DtoUsuario(usuario));
 	}
 
+	@CrossOrigin
 	@RequestMapping("/findByid")
 	public Usuario buscarUsuario(@RequestParam(value = "id", required = true) Integer id) {
 		return usuarioService.findById(id);
 	}
-
+	
+	@CrossOrigin
 	@RequestMapping("/findAll")
 	public List<Usuario> buscarUsuarios(){
 		return usuarioService.findAll();

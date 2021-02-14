@@ -14,7 +14,7 @@ import br.com.thundercoders.model.ContaCredito;
 import br.com.thundercoders.model.dto.DtoContaDashBoard;
 import br.com.thundercoders.service.ContaService;
 
-@CrossOrigin
+
 @RestController
 @RequestMapping("/conta")
 public class ContaController {
@@ -22,11 +22,13 @@ public class ContaController {
 	@Autowired
 	private ContaService contaService;
 
+	@CrossOrigin
 	@PostMapping
 	public void novaContaCredito(@RequestBody ContaCredito contaCredito) {
 		contaService.save(contaCredito);
 	}
 
+	@CrossOrigin
 	@GetMapping("/dashboard/{id}")
 	public ResponseEntity<DtoContaDashBoard> dashBoard(@PathVariable Integer id) {
 		return ResponseEntity.ok(contaService.findDashBoard(id));
