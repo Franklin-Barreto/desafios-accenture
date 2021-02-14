@@ -50,14 +50,11 @@ public class LancamentoController {
 	}
 
 	@CrossOrigin
-	@GetMapping("{idConta}")
+	@GetMapping("/{idConta}")
 	public ResponseEntity<List<DtoLancamento>> buscarLancamentoPorConta(@PathVariable("idConta") Integer idConta) {
 
-		try {
 			return ResponseEntity.ok(lancamentoService.buscarLancamentoPorConta(idConta));
-		}catch (Exception ee) {
-			return null;
-		}
+	
 	}
 
 	@CrossOrigin

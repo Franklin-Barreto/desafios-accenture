@@ -3,6 +3,7 @@ package br.com.thundercoders.service;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -53,12 +54,9 @@ public class LancamentoService {
 	// Método extrair lancamentos por idConta
 	public List<DtoLancamento> buscarLancamentoPorConta(Integer idConta) {
 
-		List<DtoLancamento> listDtoLancamentos = new ArrayList<>();
+		List<Lancamento> lancamentos = lancamentoRepository.findAllByContaId(idConta);
 
-		for (Lancamento lancamentoAtual : lancamentoRepository.findAllByContaId(idConta)) {
-			listDtoLancamentos.add(new DtoLancamento(lancamentoAtual));
-		}
-		return listDtoLancamentos;
+		return lancamentos.stream().map(l -> new DtoLancamento(l)).collect(Collectors.toList());
 	}
 
 	// Método extrair por périodo e idConta
