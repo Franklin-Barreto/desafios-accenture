@@ -2,13 +2,14 @@ package br.com.thundercoders.model.dto;
 
 import java.time.LocalDateTime;
 
+import br.com.thundercoders.model.ContaCorrente;
 import br.com.thundercoders.model.Lancamento;
 import br.com.thundercoders.model.LancamentoTipo;
 
 public class DtoLancamento {
 
 	private Integer contaId;
-	private Integer contaDestinoId;
+	private String contaDestinoNumero;
 	private Integer planoContaId;
 	private Double valor;
 	private String descricao;
@@ -28,10 +29,10 @@ public class DtoLancamento {
 		this.lancamentoTipo = lancamentoTipo;
 	}
 
-	public DtoLancamento(Integer contaId, Integer contaDestinoId, Integer planoContaId, Double valor, String descricao,
-			LocalDateTime dataHora, LancamentoTipo lancamentoTipo) {
+	public DtoLancamento(Integer contaId, String contaDestinoNumero, Integer planoContaId, Double valor,
+			String descricao, LocalDateTime dataHora, LancamentoTipo lancamentoTipo) {
 		this.contaId = contaId;
-		this.contaDestinoId = contaDestinoId;
+		this.contaDestinoNumero = contaDestinoNumero;
 		this.planoContaId = planoContaId;
 		this.valor = valor;
 		this.descricao = descricao;
@@ -42,7 +43,7 @@ public class DtoLancamento {
 	public DtoLancamento(Lancamento lancamento) {
 		this.contaId = lancamento.getConta().getId();
 		if (lancamento.getContaDestino() != null) {
-			this.contaDestinoId = lancamento.getContaDestino().getId();
+			this.contaDestinoNumero = ((ContaCorrente) lancamento.getContaDestino()).getNumero();
 		}
 		if (lancamento.getPlanoConta() != null) {
 			this.planoContaId = lancamento.getPlanoConta().getId();
@@ -57,8 +58,8 @@ public class DtoLancamento {
 		return contaId;
 	}
 
-	public Integer getContaDestinoId() {
-		return contaDestinoId;
+	public String getContaDestinoNumero() {
+		return contaDestinoNumero;
 	}
 
 	public Integer getPlanoContaId() {

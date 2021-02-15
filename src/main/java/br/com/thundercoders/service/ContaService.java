@@ -33,4 +33,9 @@ public class ContaService {
 	public DtoContaDashBoard findDashBoard(Integer id) {
 		return contaRepository.findDashBoardUsuarioId(id);
 	}
+
+	public Conta findByNumero(String contaDestinoNumero) {
+		
+		return contaRepository.findByNumero(contaDestinoNumero);
+	}
 }

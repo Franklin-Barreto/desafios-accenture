@@ -76,7 +76,7 @@ class LancamentoServiceTest {
 	void salvaLancamentoTransferencia() {
 	
 		Lancamento salvaLancamento = this.lancamentoService
-				.salvaLancamento(new DtoLancamento(1, contaDestino.getId(), 1, 50.0,
+				.salvaLancamento(new DtoLancamento(1, ((ContaCorrente)contaDestino).getNumero(), 1, 50.0,
 						"Almoço", LocalDateTime.now(), LancamentoTipo.TRANSFERENCIA));
 		assertNotNull(salvaLancamento);
 	//	assertEquals(450.0, salvaLancamento.getConta().getSaldo());

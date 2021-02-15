@@ -34,9 +34,12 @@ public class LancamentoService {
 	public Lancamento salvaLancamento(DtoLancamento dtoLancamento) {
 		LancamentoTipo lancamentoTipo = dtoLancamento.getLancamentoTipo();
 		Conta conta = contaService.findById(dtoLancamento.getContaId());
-		Conta contaDestino = null;
-
+		Conta contaDestino = dtoLancamento.getContaDestinoNumero() != null
+				? contaService.findByNumero(dtoLancamento.getContaDestinoNumero())
+				: null;
+		Integer contaDestinoId = contaDestino != null ? contaDestino.getId() : null;
 		PlanoConta planoConta = null;
+
 		if (dtoLancamento.getPlanoContaId() != null) {
 
 			planoConta = planoContaService.findById(dtoLancamento.getPlanoContaId());
@@ -46,12 +49,11 @@ public class LancamentoService {
 
 		lancamentoTipo.setService(contaService);
 		contaDestino = lancamentoTipo.getOperacao().efetuarOperacao(dtoLancamento.getValor(),
-				dtoLancamento.getContaId(), dtoLancamento.getContaDestinoId());
+				dtoLancamento.getContaId(), contaDestinoId);
 		lancamento.setContaDestino(contaDestino);
 		return lancamentoRepository.save(lancamento);
 	}
 
-	// Método extrair lancamentos por idConta
 	public List<DtoLancamento> buscarLancamentoPorConta(Integer idConta) {
 
 		List<Lancamento> lancamentos = lancamentoRepository.findAllByContaId(idConta);
@@ -59,7 +61,6 @@ public class LancamentoService {
 		return lancamentos.stream().map(l -> new DtoLancamento(l)).collect(Collectors.toList());
 	}
 
-	// Método extrair por périodo e idConta
 	public List<DtoLancamento> buscarPorPeriodoEIdConta(Integer idConta, LocalDateTime dataInicial,
 			LocalDateTime dataFinal) {
 
