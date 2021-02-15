@@ -31,6 +31,6 @@ public class ContaService {
 	}
 	
 	public DtoContaDashBoard findDashBoard(Integer id) {
-		return contaRepository.findDashBoardByContaId(id);
+		return contaRepository.findDashBoardUsuarioId(id);
 	}
 }

@@ -8,8 +8,8 @@ import br.com.thundercoders.model.dto.DtoContaDashBoard;
 
 public interface ContaRepository extends CrudRepository<Conta, Integer> {
 
-	@Query("SELECT new br.com.thundercoders.model.dto.DtoContaDashBoard(saldo,limite) FROM Conta c  WHERE c.id = :id")
-	DtoContaDashBoard findDashBoardByContaId(Integer id);
+	@Query("SELECT new br.com.thundercoders.model.dto.DtoContaDashBoard(saldo,limite) FROM Conta c  WHERE c.usuario.id = :id")
+	DtoContaDashBoard findDashBoardUsuarioId(Integer id);
 
 	Conta findByUsuarioId(Integer id);
 
