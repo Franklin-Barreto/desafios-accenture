@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 
+import br.com.thundercoders.model.Conta;
 import br.com.thundercoders.model.Usuario;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
@@ -25,10 +26,10 @@ public class TokenService {
 		Date dataCriacao = new Date();
 		Date dataExpiracao = new Date(dataCriacao.getTime() + Long.parseLong(expiracao));
 		Usuario logado = (Usuario) auth.getPrincipal();
-
+		
 		return Jwts.builder().setIssuer("bank line").setSubject(logado.getId().toString()).setIssuedAt(dataCriacao)
 				.setExpiration(dataExpiracao).signWith(SignatureAlgorithm.HS256, secret)
-				.claim("conta", logado.getContas().get(0).getId()).claim("nome", logado.getNome()).compact();
+				.claim("contas", logado.getContas().stream().mapToInt(Conta::getId).toArray()).claim("nome", logado.getNome()).compact();
 	}
 
 	public boolean isTokenValid(String token) {

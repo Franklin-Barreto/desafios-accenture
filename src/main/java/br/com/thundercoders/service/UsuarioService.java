@@ -78,7 +78,7 @@ public class UsuarioService implements UserDetailsService {
 		return usuarioRepository.findByLogin(username);
 	}
 
-	public Conta findContaUsuario(Integer id) {
+	public List<Conta> findContaUsuario(Integer id) {
 		return this.contaService.findContaByUsuarioId(id);
 	}
 

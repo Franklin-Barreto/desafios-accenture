@@ -49,5 +49,17 @@ public class ContaCredito extends Conta {
 	public Double getSaldo() {
 		return limite;
 	}
+	
+	public String getCvv() {
+		return cvv;
+	}
+	
+	public String getNomeImpresso() {
+		return nomeImpresso;
+	}
+	
+	public String getNumeroCartao() {
+		return numeroCartao;
+	}
 
 }

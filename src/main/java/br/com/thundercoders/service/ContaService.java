@@ -1,8 +1,11 @@
 package br.com.thundercoders.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import br.com.thundercoders.exceptions.DashBoardNotFoundException;
 import br.com.thundercoders.model.Conta;
 import br.com.thundercoders.model.dto.DtoContaDashBoard;
 import br.com.thundercoders.repository.ContaRepository;
@@ -26,16 +29,21 @@ public class ContaService {
 		return contaRepository.save(conta);
 	}
 
-	public Conta findContaByUsuarioId(Integer id) {
+	public List<Conta> findContaByUsuarioId(Integer id) {
 		return contaRepository.findByUsuarioId(id);
 	}
-	
+
 	public DtoContaDashBoard findDashBoard(Integer id) {
-		return contaRepository.findDashBoardUsuarioId(id);
+		return contaRepository.findDashBoardUsuarioId(id)
+				.orElseThrow(() -> new DashBoardNotFoundException("Usuário não possue contas"));
 	}
 
 	public Conta findByNumero(String contaDestinoNumero) {
-		
+
 		return contaRepository.findByNumero(contaDestinoNumero);
+	}
+
+	public List<Conta> findAll() {
+		return contaRepository.findAll();
 	}
 }

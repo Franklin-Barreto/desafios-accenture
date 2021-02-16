@@ -1,7 +1,6 @@
 package br.com.thundercoders.service;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -37,7 +36,7 @@ public class LancamentoService {
 		Conta contaDestino = dtoLancamento.getContaDestinoNumero() != null
 				? contaService.findByNumero(dtoLancamento.getContaDestinoNumero())
 				: null;
-		Integer contaDestinoId = contaDestino != null ? contaDestino.getId() : null;
+
 		PlanoConta planoConta = null;
 
 		if (dtoLancamento.getPlanoContaId() != null) {
@@ -47,9 +46,7 @@ public class LancamentoService {
 		Lancamento lancamento = new Lancamento(conta, planoConta, dtoLancamento.getValor(),
 				dtoLancamento.getDescricao(), dtoLancamento.getDataHora(), dtoLancamento.getLancamentoTipo());
 
-		lancamentoTipo.setService(contaService);
-		contaDestino = lancamentoTipo.getOperacao().efetuarOperacao(dtoLancamento.getValor(),
-				dtoLancamento.getContaId(), contaDestinoId);
+		contaDestino = lancamentoTipo.getOperacao().efetuarOperacao(dtoLancamento.getValor(), conta, contaDestino);
 		lancamento.setContaDestino(contaDestino);
 		return lancamentoRepository.save(lancamento);
 	}
@@ -63,22 +60,8 @@ public class LancamentoService {
 
 	public List<DtoLancamento> buscarPorPeriodoEIdConta(Integer idConta, LocalDateTime dataInicial,
 			LocalDateTime dataFinal) {
-
-		List<DtoLancamento> listDtoLancamentos = new ArrayList<>();
-		for (Lancamento lancamentoAtual : lancamentoRepository.findAllByContaIdAndDataHoraBetween(idConta, dataInicial,
-				dataFinal)) {
-
-			listDtoLancamentos.add(new DtoLancamento(lancamentoAtual));
-
-		}
-		return listDtoLancamentos;
-	}
-
-	// Método extrair por périodo e idConta e salvar num arquivo .txt (Projeto
-	// futuro {SpringBoot}: html=>PDF e CSV/EXCEL)
-	public void extractFileByPeriodAndIdConta(Integer idConta, LocalDateTime dataInicial, LocalDateTime dataFinal) {
-		// Fazer a lógica de salvamento
-		// Método static no Utils e Escrever
+		return lancamentoRepository.findAllByContaIdAndDataHoraBetween(idConta, dataInicial, dataFinal).stream()
+				.map(l -> new DtoLancamento(l)).collect(Collectors.toList());
 	}
 
 }

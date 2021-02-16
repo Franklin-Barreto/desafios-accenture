@@ -47,7 +47,7 @@ class LancamentoServiceTest {
 	public void initialize() {
 		this.usuario = this.usuarioService
 				.save(new DtoUsuario("joao.pedro", "14587", "João Pedro", "45896578412", 200.0));
-		this.conta = this.usuarioService.findContaUsuario(1);
+		this.conta = this.usuarioService.findContaUsuario(1).stream().findFirst().get();
 		this.contaDestino = contaService.save(new ContaCorrente(usuario,  400.0));
 	}
 

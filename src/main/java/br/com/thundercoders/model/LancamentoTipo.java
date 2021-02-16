@@ -1,6 +1,5 @@
 package br.com.thundercoders.model;
 
-import br.com.thundercoders.service.ContaService;
 import br.com.thundercoders.service.Despesa;
 import br.com.thundercoders.service.OperacaoI;
 import br.com.thundercoders.service.Receita;
@@ -14,10 +13,6 @@ public enum LancamentoTipo {
 
 	private LancamentoTipo(OperacaoI operacao) {
 		this.operacao = operacao;
-	}
-
-	public void setService(ContaService service) {
-		this.operacao.setService(service);
 	}
 
 	public OperacaoI getOperacao() {
