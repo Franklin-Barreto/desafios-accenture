@@ -34,8 +34,13 @@ public class ContaService {
 	}
 
 	public DtoContaDashBoard findDashBoard(Integer id) {
-		return contaRepository.findDashBoardUsuarioId(id)
-				.orElseThrow(() -> new DashBoardNotFoundException("Usuário não possue contas"));
+
+		double[] valores = contaRepository.findByUsuarioId(id).stream().mapToDouble(Conta::getSaldo).toArray();
+		if (valores.length < 2) {
+			throw new DashBoardNotFoundException("Usuário não tem todas as contas cadastradas");
+		}
+		return new DtoContaDashBoard(valores[0], valores[1]);
+
 	}
 
 	public Conta findByNumero(String contaDestinoNumero) {
