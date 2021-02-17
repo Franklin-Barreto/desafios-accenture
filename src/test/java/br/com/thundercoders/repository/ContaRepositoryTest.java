@@ -1,6 +1,5 @@
 package br.com.thundercoders.repository;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import org.junit.jupiter.api.Test;
@@ -12,7 +11,6 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import br.com.thundercoders.model.Conta;
 import br.com.thundercoders.model.ContaCorrente;
 import br.com.thundercoders.model.Usuario;
-import br.com.thundercoders.model.dto.DtoContaDashBoard;
 @DataJpaTest
 @TestInstance(Lifecycle.PER_CLASS)
  class ContaRepositoryTest {
@@ -30,11 +28,5 @@ import br.com.thundercoders.model.dto.DtoContaDashBoard;
 		assertNotNull(conta);
 	}
 	
-	@Test
-	void buscaDadosDashBoard() {
-		DtoContaDashBoard conta = contaRepository.findDashBoardUsuarioId(1).get();
-		assertEquals(500, conta.getLimite());
-		assertEquals(480, conta.getSaldo());
-		
-	}
+
 }
