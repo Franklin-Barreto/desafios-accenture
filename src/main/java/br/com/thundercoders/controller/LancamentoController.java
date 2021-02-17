@@ -50,21 +50,21 @@ public class LancamentoController {
 	}
 
 	@CrossOrigin
-	@GetMapping("/{idConta}")
-	public ResponseEntity<List<DtoLancamento>> buscarLancamentoPorConta(@PathVariable("idConta") Integer idConta) {
-
-			return ResponseEntity.ok(lancamentoService.buscarLancamentoPorConta(idConta));
-	
+	@GetMapping("/usuario/{id}")
+	public ResponseEntity<List<DtoLancamento>> buscarLancamentoPorConta(@PathVariable Integer id) {
+		return ResponseEntity.ok(lancamentoService.buscarLancamentos(id));
 	}
 
 	@CrossOrigin
 	@GetMapping("porPeriodo/{idConta}")
-	public ResponseEntity<List<DtoLancamento>> buscarLancamentoPorPeriodoEConta(@PathVariable("idConta") Integer idConta,@DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) @RequestParam LocalDateTime dataInicial,
-																				@DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) @RequestParam LocalDateTime dataFinal) {
+	public ResponseEntity<List<DtoLancamento>> buscarLancamentoPorPeriodoEConta(
+			@PathVariable("idConta") Integer idConta,
+			@DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) @RequestParam LocalDateTime dataInicial,
+			@DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) @RequestParam LocalDateTime dataFinal) {
 
 		try {
-			return ResponseEntity.ok(lancamentoService.buscarPorPeriodoEIdConta(idConta,dataInicial,dataFinal));
-		}catch (Exception ee) {
+			return ResponseEntity.ok(lancamentoService.buscarPorPeriodoEIdConta(idConta, dataInicial, dataFinal));
+		} catch (Exception ee) {
 			return null;
 		}
 	}
