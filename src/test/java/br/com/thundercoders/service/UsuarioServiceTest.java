@@ -30,7 +30,7 @@ public class UsuarioServiceTest {
 	@Order(1)
 	public void salvaUsuario() throws IllegalAccessException {
 		Usuario save = usuarioService
-				.save(new DtoUsuario("guilherme.lima", "14587", "Guilherme Lima", "45896578412", 600.0));
+				.save(new DtoUsuario("guilherme.lima", "14587", "Guilherme Lima", "45896578412", 600.0,null));
 		assertNotNull(save);
 	}
 
@@ -38,7 +38,7 @@ public class UsuarioServiceTest {
 	@Order(2)
 	public void salvaUsuario2() throws IllegalAccessException {
 		Usuario usuario = this.usuarioService
-				.save(new DtoUsuario("igor.shimauti", "56789", "Igor Shimauti", "36285117802", 700.0));
+				.save(new DtoUsuario("igor.shimauti", "56789", "Igor Shimauti", "36285117802", 700.0,null));
 		assertNotNull(usuario);
 	}
 

@@ -25,7 +25,7 @@ class UsuarioRepositoryTest {
 
 	@BeforeAll
 	public void initialize() {
-		usuario = repository.save(new Usuario("franklin-barreto", "12345", "Franklin Barreto", "12345678910"));
+		usuario = repository.save(new Usuario("franklin-barreto", "12345", "Franklin Barreto", "12345678910",null));
 
 	}
 

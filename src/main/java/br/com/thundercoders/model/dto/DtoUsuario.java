@@ -26,13 +26,16 @@ public class DtoUsuario {
 
 	@Min(10)
 	private Double saldo;
+	
+	private String telefone;
 
-	public DtoUsuario(String login, String senha, String nome, String cpf, Double saldo) {
+	public DtoUsuario(String login, String senha, String nome, String cpf, Double saldo,String telefone) {
 		this.login = login;
 		this.senha = senha;
 		this.nome = nome;
 		this.cpf = cpf;
 		this.saldo = saldo;
+		this.telefone = telefone;
 	}
 
 	public DtoUsuario(Usuario usuario) {
@@ -40,6 +43,7 @@ public class DtoUsuario {
 		this.senha = usuario.getPassword();
 		this.nome = usuario.getNome();
 		this.cpf = usuario.getCpf();
+		this.telefone = usuario.getTelefone();
 	}
 
 	public String getLogin() {
@@ -61,10 +65,21 @@ public class DtoUsuario {
 	public Double getSaldo() {
 		return saldo;
 	}
+	
+	public String getTelefone() {
+		return telefone;
+	}
 
 	public Usuario converte() {
 
-		return new Usuario(login, senha, nome, cpf);
+		return new Usuario(login, senha, nome, cpf,telefone);
 	}
+
+	@Override
+	public String toString() {
+		return "DtoUsuario [login=" + login + ", senha=" + senha + ", nome=" + nome + ", cpf=" + cpf + ", saldo="
+				+ saldo + ", telefone=" + telefone + "]";
+	}
+	
 
 }

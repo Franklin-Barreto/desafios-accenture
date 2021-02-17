@@ -34,17 +34,20 @@ public class Usuario extends EntidadeBase implements UserDetails {
 	@Column(length = 12, nullable = false)
 	private String cpf;
 
+	private String telefone;
+
 	@OneToMany(mappedBy = "usuario", cascade = CascadeType.PERSIST)
 	private List<Conta> contas = new ArrayList<>();
 
 	public Usuario() {
 	}
 
-	public Usuario(String login, String senha, String nome, String cpf) {
+	public Usuario(String login, String senha, String nome, String cpf,String telefone) {
 		this.login = login;
 		this.senha = senha;
 		this.nome = nome;
 		this.cpf = cpf;
+		this.telefone = telefone;
 	}
 
 	public void setLogin(String login) {
@@ -71,6 +74,10 @@ public class Usuario extends EntidadeBase implements UserDetails {
 		this.cpf = cpf;
 	}
 
+	public String getTelefone() {
+		return telefone;
+	}
+	
 	public List<Conta> getContas() {
 		return Collections.unmodifiableList(contas);
 	}

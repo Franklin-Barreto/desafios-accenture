@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import br.com.thundercoders.model.Conta;
+import br.com.thundercoders.model.ContaCorrente;
 import br.com.thundercoders.model.Lancamento;
 import br.com.thundercoders.model.LancamentoTipo;
 import br.com.thundercoders.model.PlanoConta;
@@ -32,7 +33,7 @@ public class LancamentoService {
 
 	public Lancamento salvaLancamento(DtoLancamento dtoLancamento) {
 		LancamentoTipo lancamentoTipo = dtoLancamento.getLancamentoTipo();
-		Conta conta = contaService.findById(dtoLancamento.getContaId());
+		ContaCorrente conta = (ContaCorrente) contaService.findById(dtoLancamento.getContaId());
 		Conta contaDestino = dtoLancamento.getContaDestinoNumero() != null
 				? contaService.findByNumero(dtoLancamento.getContaDestinoNumero())
 				: null;
@@ -47,6 +48,10 @@ public class LancamentoService {
 				dtoLancamento.getDescricao(), dtoLancamento.getDataHora(), dtoLancamento.getLancamentoTipo());
 
 		contaDestino = lancamentoTipo.getOperacao().efetuarOperacao(dtoLancamento.getValor(), conta, contaDestino);
+		if (contaDestino != null) {
+			lancamentoRepository.save(new Lancamento(contaDestino, null, dtoLancamento.getValor(),
+					"Transferencia conta " + conta.getNumero(), dtoLancamento.getDataHora(), LancamentoTipo.RECEITA));
+		}
 		lancamento.setContaDestino(contaDestino);
 		return lancamentoRepository.save(lancamento);
 	}

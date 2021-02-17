@@ -43,7 +43,7 @@ class LancamentoRepositoryTest {
 
 	@BeforeAll
 	public void initialize() {
-		this.usuario = uRepository.save(new Usuario("franklin-barreto2", "12345", "Franklin Barreto", "12345678910"));
+		this.usuario = uRepository.save(new Usuario("franklin-barreto2", "12345", "Franklin Barreto", "12345678910",null));
 		this.conta = cRepository.save(new ContaCorrente(usuario,  200.0));
 		PlanoConta planoConta = pRepository.save(new PlanoConta(usuario, "Farra"));
 		this.lancamento = repository.save(new Lancamento(conta, planoConta, 20.0, "Cerveja",

@@ -25,7 +25,7 @@ import br.com.thundercoders.model.dto.DtoContaDashBoard;
 
 	@Test
 	 void salvaConta() {
-		Usuario usuario = usuarioRepository.save(new Usuario("joao.joaquim","123456", "joao", "1234567890"));
+		Usuario usuario = usuarioRepository.save(new Usuario("joao.joaquim","123456", "joao", "1234567890",null));
 		Conta conta = contaRepository.save(new ContaCorrente(usuario,  200.0));
 		assertNotNull(conta);
 	}

@@ -44,6 +44,7 @@ public class UsuarioController {
 	@PostMapping
 	public ResponseEntity<DtoUsuario> incluirUsuario(@RequestBody @Valid DtoUsuario dtoUsuario,
 			UriComponentsBuilder uriBuilder) {
+		System.out.println("Dto "+dtoUsuario);
 		Usuario usuario = usuarioService.save(dtoUsuario);
 		URI uri = uriBuilder.path("usuario/{id}").buildAndExpand(usuario.getId()).toUri();
 		return ResponseEntity.created(uri).body(new DtoUsuario(usuario));
