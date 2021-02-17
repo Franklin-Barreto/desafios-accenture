@@ -33,7 +33,7 @@ public class LancamentoService {
 
 	public Lancamento salvaLancamento(DtoLancamento dtoLancamento) {
 		LancamentoTipo lancamentoTipo = dtoLancamento.getLancamentoTipo();
-		ContaCorrente conta = (ContaCorrente) contaService.findById(dtoLancamento.getContaId());
+		Conta conta = contaService.findById(dtoLancamento.getContaId());
 		Conta contaDestino = dtoLancamento.getContaDestinoNumero() != null
 				? contaService.findByNumero(dtoLancamento.getContaDestinoNumero())
 				: null;
@@ -50,7 +50,7 @@ public class LancamentoService {
 		contaDestino = lancamentoTipo.getOperacao().efetuarOperacao(dtoLancamento.getValor(), conta, contaDestino);
 		if (contaDestino != null) {
 			lancamentoRepository.save(new Lancamento(contaDestino, null, dtoLancamento.getValor(),
-					"Transferencia conta " + conta.getNumero(), dtoLancamento.getDataHora(), LancamentoTipo.RECEITA));
+					"Transferencia conta " + ((ContaCorrente) conta).getNumero(), dtoLancamento.getDataHora(), LancamentoTipo.RECEITA));
 		}
 		lancamento.setContaDestino(contaDestino);
 		return lancamentoRepository.save(lancamento);
