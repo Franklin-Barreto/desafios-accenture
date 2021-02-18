@@ -13,4 +13,7 @@ public interface PlanoContaRepository extends JpaRepository<PlanoConta, Integer>
 
 	@Query("Select new br.com.thundercoders.model.dto.DtoPlanoContaResponse(id, descricao, tipo) from PlanoConta p where p.tipo= :tipo")
 	List<DtoPlanoContaResponse> findAllByTipo(PlanoContaTipo tipo);
+	
+	@Query("Select new br.com.thundercoders.model.dto.DtoPlanoContaResponse(id, descricao, tipo) from PlanoConta p")
+	List<DtoPlanoContaResponse> findAllPlanoConta();
 }

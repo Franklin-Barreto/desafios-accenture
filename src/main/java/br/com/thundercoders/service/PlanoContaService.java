@@ -37,8 +37,8 @@ public class PlanoContaService {
 		return planoContaRepository.findAllByTipo(PlanoContaTipo.valueOf(tipo));
 	}
 	
-	public List<PlanoConta> findAll(){
-		return planoContaRepository.findAll();
+	public List<DtoPlanoContaResponse> findAll(){
+		return planoContaRepository.findAllPlanoConta();
 	}
 
 }

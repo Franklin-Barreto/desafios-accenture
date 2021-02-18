@@ -43,5 +43,11 @@ public class PlanoContaController {
 	public ResponseEntity<List<DtoPlanoContaResponse>> planosDeContas(@PathVariable Integer id) {
 		return ResponseEntity.ok(planoContaService.findAllByTipo(id));
 	}
+	
+	@CrossOrigin
+	@GetMapping
+	public ResponseEntity<List<DtoPlanoContaResponse>> planos(){
+		return ResponseEntity.ok(planoContaService.findAll());
+	}
 
 }
