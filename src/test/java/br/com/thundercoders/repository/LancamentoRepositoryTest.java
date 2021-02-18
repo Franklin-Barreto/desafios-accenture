@@ -22,6 +22,7 @@ import br.com.thundercoders.model.ContaCorrente;
 import br.com.thundercoders.model.Lancamento;
 import br.com.thundercoders.model.LancamentoTipo;
 import br.com.thundercoders.model.PlanoConta;
+import br.com.thundercoders.model.PlanoContaTipo;
 import br.com.thundercoders.model.Usuario;
 
 @TestInstance(Lifecycle.PER_CLASS)
@@ -45,7 +46,7 @@ class LancamentoRepositoryTest {
 	public void initialize() {
 		this.usuario = uRepository.save(new Usuario("franklin-barreto2", "12345", "Franklin Barreto", "12345678910",null));
 		this.conta = cRepository.save(new ContaCorrente(usuario,  200.0));
-		PlanoConta planoConta = pRepository.save(new PlanoConta(usuario, "Farra"));
+		PlanoConta planoConta = pRepository.save(new PlanoConta(usuario, "Farra",PlanoContaTipo.DESPESA));
 		this.lancamento = repository.save(new Lancamento(conta, planoConta, 20.0, "Cerveja",
 				LocalDateTime.of(2020, 1, 1, 00, 00), LancamentoTipo.DESPESA));
 		assertEquals(1, lancamento.getId());

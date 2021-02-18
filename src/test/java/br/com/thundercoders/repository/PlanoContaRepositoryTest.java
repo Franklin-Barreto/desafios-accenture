@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 
 import br.com.thundercoders.model.PlanoConta;
+import br.com.thundercoders.model.PlanoContaTipo;
 import br.com.thundercoders.model.Usuario;
 
 @DataJpaTest
@@ -28,7 +29,7 @@ class PlanoContaRepositoryTest {
 	void salvarPlanoContasTest() {
 		this.usuario = usuarioRepository.findById(1)
 				.orElseThrow(() -> new RuntimeException("Erro plano de conta repository"));
-		PlanoConta save = repository.save(new PlanoConta(usuario, "Pagamento de salário"));
+		PlanoConta save = repository.save(new PlanoConta(usuario, "Pagamento de salário",PlanoContaTipo.RECEITA));
 		assertNotNull(save.getId());
 	}
 
@@ -37,7 +38,7 @@ class PlanoContaRepositoryTest {
 	void salvarPlanoContasTest2() {
 		this.usuario = usuarioRepository.findById(2)
 				.orElseThrow(() -> new RuntimeException("Erro plano de conta repository"));
-		PlanoConta save = repository.save(new PlanoConta(usuario, "Pagamento de salário"));
+		PlanoConta save = repository.save(new PlanoConta(usuario, "Pagamento de salário",PlanoContaTipo.DESPESA));
 		assertNotNull(save.getId());
 	}
 }

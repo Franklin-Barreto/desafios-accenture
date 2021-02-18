@@ -26,10 +26,10 @@ public class PlanoContaServiceTest {
 	@Test
 	@Order(1)
 	public void salvaPlanoContaServiceTest() {
-		planoContaService.salvaPlanoConta(new DtoPlanoConta(1, "Alimentação"));
-		planoContaService.salvaPlanoConta(new DtoPlanoConta(1, "Combutível"));
-		planoContaService.salvaPlanoConta(new DtoPlanoConta(2, "Alimentação"));
-		planoContaService.salvaPlanoConta(new DtoPlanoConta(2, "Combutível"));
+		planoContaService.salvaPlanoConta(new DtoPlanoConta(1, "Alimentação",1));
+		planoContaService.salvaPlanoConta(new DtoPlanoConta(1, "Combutível",1));
+		planoContaService.salvaPlanoConta(new DtoPlanoConta(2, "Alimentação",2));
+		planoContaService.salvaPlanoConta(new DtoPlanoConta(2, "Combutível",2));
 		assertTrue(planoContaService.findAll().size()>=4);
 	}
 	
