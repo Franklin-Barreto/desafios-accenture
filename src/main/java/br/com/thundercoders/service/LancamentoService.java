@@ -58,7 +58,7 @@ public class LancamentoService {
 
 	public List<DtoLancamento> buscarLancamentos(Integer id) {
 
-		List<Lancamento> lancamentos = lancamentoRepository.findAllByContaUsuarioId(id);
+		List<Lancamento> lancamentos = lancamentoRepository.findTop5ByContaUsuarioIdOrderByIdDesc(id);
 
 		return lancamentos.stream().map(l -> new DtoLancamento(l)).collect(Collectors.toList());
 	}

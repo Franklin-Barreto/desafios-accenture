@@ -11,7 +11,7 @@ import br.com.thundercoders.model.Lancamento;
 
 public interface LancamentoRepository extends JpaRepository<Lancamento, Integer> {
 
-	public List<Lancamento> findAllByContaUsuarioId(Integer id);
+	public List<Lancamento> findTop5ByContaUsuarioIdOrderByIdDesc(Integer id);
 	
 	@Query("FROM Lancamento l WHERE l.conta.id = :id")
 	public List<Lancamento> findAllByContaId(@Param("id") Integer id);
