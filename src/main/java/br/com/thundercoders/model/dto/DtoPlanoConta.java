@@ -4,6 +4,7 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
 import br.com.thundercoders.model.PlanoConta;
+import br.com.thundercoders.model.PlanoContaTipo;
 
 public class DtoPlanoConta {
 
@@ -13,9 +14,12 @@ public class DtoPlanoConta {
 	@NotNull
 	private String descricao;
 
-	public DtoPlanoConta(Integer usuarioId, String descricao) {
+	private Integer tipo;
+
+	public DtoPlanoConta(Integer usuarioId, String descricao, Integer tipo) {
 		this.usuarioId = usuarioId;
 		this.descricao = descricao;
+		this.tipo = tipo;
 	}
 
 	public Integer getUsuarioId() {
@@ -26,8 +30,14 @@ public class DtoPlanoConta {
 		return descricao;
 	}
 
+	public String getTipo() {
+		PlanoContaTipo planoContaTipo = PlanoContaTipo.valueOf(tipo);
+		return planoContaTipo.toString();
+	}
+
 	public DtoPlanoConta converter(PlanoConta planoConta) {
-		return new DtoPlanoConta(planoConta.getUsuario().getId(), planoConta.getDescricao());
+		return new DtoPlanoConta(planoConta.getUsuario().getId(), planoConta.getDescricao(),
+				planoConta.getTipo().getTipo());
 	}
 
 }

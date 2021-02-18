@@ -18,9 +18,10 @@ public class PlanoConta extends EntidadeBase {
 	public PlanoConta() {
 	}
 
-	public PlanoConta(Usuario usuario, String descricao) {
+	public PlanoConta(Usuario usuario, String descricao,PlanoContaTipo tipo) {
 		this.usuario = usuario;
 		this.descricao = descricao;
+		this.tipo = tipo;
 	}
 
 	public String getDescricao() {
@@ -40,6 +41,7 @@ public class PlanoConta extends EntidadeBase {
 	}
 	
 	public PlanoContaTipo getTipo() {
+		System.out.println(tipo);
 		return tipo;
 	}
 }

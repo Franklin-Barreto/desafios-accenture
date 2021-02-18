@@ -7,6 +7,8 @@ import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 
 import br.com.thundercoders.model.Conta;
+import br.com.thundercoders.model.ContaCorrente;
+import br.com.thundercoders.model.ContaCredito;
 import br.com.thundercoders.model.Usuario;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
@@ -29,6 +31,8 @@ public class TokenService {
 		
 		return Jwts.builder().setIssuer("bank line").setSubject(logado.getId().toString()).setIssuedAt(dataCriacao)
 				.setExpiration(dataExpiracao).signWith(SignatureAlgorithm.HS256, secret)
+				.claim("contaNumero",((ContaCorrente) logado.getContas().get(0)).getNumero())
+				.claim("cartaoNumero",((ContaCredito) logado.getContas().get(1)).getNumeroCartao())
 				.claim("contas", logado.getContas().stream().mapToInt(Conta::getId).toArray()).claim("nome", logado.getNome()).compact();
 	}
 

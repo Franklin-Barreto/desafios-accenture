@@ -26,7 +26,7 @@ public class PlanoContaService {
 
 	public PlanoConta salvaPlanoConta(DtoPlanoConta dtoPlanoConta) {
 		Usuario usuario = usuarioService.findById(dtoPlanoConta.getUsuarioId());
-		return planoContaRepository.save(new PlanoConta(usuario, dtoPlanoConta.getDescricao()));
+		return planoContaRepository.save(new PlanoConta(usuario, dtoPlanoConta.getDescricao(),PlanoContaTipo.valueOf(dtoPlanoConta.getTipo())));
 	}
 
 	public PlanoConta findById(Integer id) {

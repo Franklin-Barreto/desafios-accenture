@@ -28,6 +28,7 @@ public class PlanoContaController {
 		this.planoContaService = planoContaService;
 	}
 
+	@CrossOrigin
 	@PostMapping
 	public ResponseEntity<DtoPlanoConta> salvar(@RequestBody DtoPlanoConta dtoPlanoConta,
 			UriComponentsBuilder uriBuilder) {
