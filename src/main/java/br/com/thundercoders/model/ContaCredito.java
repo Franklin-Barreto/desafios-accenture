@@ -16,7 +16,7 @@ public class ContaCredito extends Conta {
 	private String cvv;
 
 	@Column(name = "limite")
-	private Double limite;
+	private Double limite = 1000.0;
 
 	public ContaCredito() {
 	}
